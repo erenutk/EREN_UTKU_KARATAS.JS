@@ -18,10 +18,7 @@
     if (document.getElementById("my-carousel")) return;
     //stories
     var anchor = document.querySelector(".ins-instory.ins-preview-mode");
-    if (!anchor){
-        console.log("anchor not found");
-        return;
-    }
+
 
 
     var root = document.createElement("section");
@@ -43,8 +40,18 @@
     box.id="carousel-box";
     container.appendChild(box);
     root.appendChild(container);
-    anchor.after(root);
 
+    if (anchor){anchor.after(root);}
+    else{
+      console.log("stories not found");
+      var section2A = document.querySelector(".Section2A.has-components"); // beginnig of the section
+      if(section2A){section2A.prepend(root);}
+      else{
+        console.log("stories and section2A not found.");
+        return;
+      }
+      
+    }
   };
 
   const buildCSS = () => {
@@ -255,7 +262,6 @@
     const raw= localStorage.getItem("favorites");
     if(!raw) return [];
     const parsed = JSON.parse(raw);
-    console.log("parsed:",parsed);
     return parsed;
   };
 
